@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose Personality</title>
+    <style>
+        body { font-family: Arial, sans-serif; display:flex; flex-direction:column; align-items:center; padding:20px; }
+        .personality-btn { margin: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Choose Your Chatbot Personality</h1>
+    <form method="post" action="{% url 'set_personality' %}">
+        {% csrf_token %}
+        {% for p in personalities %}
+            <div>
+                <input type="radio" name="personality" value="{{ forloop.counter }}" id="p{{ forloop.counter }}" {% if forloop.counter == 4 %}checked{% endif %}>
+                <label for="p{{ forloop.counter }}">{{ p }}</label>
+            </div>
+        {% endfor %}
+        <br>
+        <button type="submit">Start Chatting</button>
+    </form>
+</body>
+</html>
